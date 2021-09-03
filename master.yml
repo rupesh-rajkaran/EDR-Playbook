@@ -1,0 +1,39 @@
+---
+# This File connnected with multiple yaml file
+# Checking falcon-sensor in various os
+# checking besclient is available or not 
+# checking root login status
+# identifying bigfix status
+# Checking password policy related parameters
+- name: Runing Various Playbooks for Checking different tasks
+  hosts: all
+ # vars:
+ ##   - cid: 20709802E00E4B4C9442CE5F8CA3E69D-9C
+ #   - tags1: demo1
+  ignore_errors: true
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    #- name: removing existing Files and Packages
+    #  include_tasks: Falcon-Install/remove.yml
+
+    - name: importing falcon-install playbook
+      include_tasks: Falcon-Install/falcon-check.yml
+
+
+    - name: importing bigfix information playboook
+      include_tasks: Bigfix_Information/bigfix-info.yml
+
+
+    - name: Importing root-access playbook
+      include_tasks: root_permit/rootaccess.yml
+
+    - name: importing fail2ban-check playbook
+      include_tasks: fail2ban/fail2ban-check.yml
+
+    - name: Importing password_policy playbook
+      include_tasks: password_policy/password_policy.yml
+
+    - name: Importing Auto-update check tasks
+      include_tasks: Autoupdate/check.yml
