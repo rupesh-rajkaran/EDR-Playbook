@@ -1,0 +1,41 @@
+---
+#CentOS Linux release 7.8.2003 (Core)
+    - name: Gather Installed Packages Facts
+      package_facts:
+        manager: "auto"
+      tags:
+        - falcon-sensor
+    
+    - name: "falcon-sensor Found test result"
+      debug: var=ansible_facts.packages['falcon-sensor']
+      when: "'falcon-sensor' in ansible_facts.packages"
+      tags:
+        - falcon-sensor 
+
+    - name: "falcon-sensor Not-found test result"
+      debug: 
+        msg: "falcon-sensor NOT found"
+      when: "'falcon-sensor' not in ansible_facts.packages"
+      tags:
+        - falcon-sensor 
+
+    - name: Copy require Crowdstrike-sensor
+      copy:
+        src: ./falcon/WW-falcon-sensor-5.38.0-10404.el7.x86_64.rpm
+        dest: /tmp
+   
+    - name: installing Latest version of Falcon-sensor
+      command: sudo yum install -y /tmp/WW-falcon-sensor-5.38.0-10404.el7.x86_64.rpm
+      when: "'falcon-sensor' not in ansible_facts.packages"
+   
+    - name: Applying Tags
+      shell: sudo /opt/CrowdStrike/falconctl -s --tags={{ tags1 }}
+    - name: Applying Cids
+      shell: sudo /opt/CrowdStrike/falconctl -s --cid={{ cid }}
+    - name: starting falcon-sensor service
+      shell: sudo systemctl start falcon-sensor
+    
+    
+    - name: Varifying falcon-sensor service 
+      shell: sudo systemctl status falcon-sensor 
+      register: service_var

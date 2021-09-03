@@ -1,0 +1,14 @@
+---
+- name: remove all things 
+  hosts: all
+  tasks:
+    - shell: sudo apt -y remove falcon-sensor
+      when:
+        - ansible_facts.distribution == "Ubuntu" 
+    - shell: sudo yum -y remove falcon-sensor
+      when:
+        - ansible_facts.distribution == "RedHat" or ansible_facts.distribution == "CentOS"
+
+    - shell: sudo rm -rf /tmp/master*
+    - shell: sudo rm -rf /opt/*
+    - shell: sudo rm -rf /tmp/falcon*

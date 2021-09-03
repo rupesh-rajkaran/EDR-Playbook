@@ -1,0 +1,39 @@
+---
+#Red Hat Enterprise Linux Server release 7.7 (Maipo)
+    - name: Gather Installed Packages Facts
+      package_facts:
+        manager: "auto"
+      tags:
+        - falcon-sensor
+    
+    - name: "falcon-sensor Found test result"
+      debug: var=ansible_facts.packages['falcon-sensor']
+      when: "'falcon-sensor' in ansible_facts.packages"
+      tags:
+        - falcon-sensor 
+
+    - name: "falcon-sensor Not-found test result"
+      debug: 
+        msg: "falcon-sensor NOT found"
+      when: "'falcon-sensor' not in ansible_facts.packages"
+      tags:
+        - falcon-sensor 
+
+    - name: Copy require Crowdstrike-sensor
+      copy:
+        src: ./falcon/falcon-sensor_4.21.0-6703_ubuntu64.deb
+        dest: /tmp
+   
+    - name: installing Latest version of Falcon-sensor
+      command: sudo dpkg -i /tmp/falcon-sensor_4.21.0-6703_ubuntu64.deb
+      when: "'falcon-sensor' not in ansible_facts.packages"
+   
+    - name: Appling Cids
+      shell: "sudo /opt/CrowdStrike/falconctl -s -f --cid={{ cid }}"
+    - name: starting falcon-sensor service
+      shell: sudo service falcon-sensor start
+    
+    
+    - name: Varifying falcon-sensor service 
+      shell: sudo service falcon-sensor status
+      register: service_var

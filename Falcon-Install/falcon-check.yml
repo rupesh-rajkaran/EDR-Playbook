@@ -1,0 +1,15 @@
+---
+    - name: Gather Installed Packages Facts
+      package_facts:
+        manager: "auto"
+      tags:
+        - falcon-sensor
+    - name: copying output in master machine
+      shell: echo "Falcon-Sensor package available in {{ ansible_facts.fqdn }}" >> "/tmp/master-output"
+      when: "'falcon-sensor' in ansible_facts.packages"
+      delegate_to: localhost
+
+    - shell: echo " Falcon-Sensor package not found in {{ ansible_facts.fqdn }}"  >> "/tmp/master-error"
+      when: "'falcon-sensor' not in ansible_facts.packages"
+      delegate_to: localhost
+

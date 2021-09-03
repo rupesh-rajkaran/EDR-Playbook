@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+
+
+  <title>Initiating SAML single sign-on</title>
+  <meta http-equiv="refresh" content="0;url=https://w3id.sso.ibm.com/auth/sps/samlidp2/saml20/logininitial?RequestBinding=HTTPPost&amp;PartnerId=https://github.ibm.com&amp;NameIdFormat=email&amp;Target=https://github.ibm.com" data-url="https://w3id.sso.ibm.com/auth/sps/samlidp2/saml20/logininitial?RequestBinding=HTTPPost&amp;PartnerId=https://github.ibm.com&amp;NameIdFormat=email&amp;Target=https://github.ibm.com">
+  <script crossorigin="use-credentials" integrity="sha512-1HCaqI0snvVG++cRVjttl/2z8fPOy9UDEars9Qf4uXI2/3XJa9EoBcaNgnLuDcYiXOsR72rcCqTDuKVSUNpZig==" type="application/javascript" src="https://assets.github.ibm.com/assets/redirect-d4709aa8.js"></script>
+  <link crossorigin="use-credentials" media="all" integrity="sha512-hddDYPWR0gBbqLRmIZP242WMEiYsVkYI2UCYCVUHB4h5DhD2cbtFJYG+HPh21dZGb+sbgDHxQBNJCBq7YbmlBQ==" rel="stylesheet" href="https://assets.github.ibm.com/assets/frameworks-02a3eaa24db2bd1ed9b64450595fc2cf.css" />
+  <link crossorigin="use-credentials" media="all" integrity="sha512-BfV7LY4o6qSpcN6OiMpmxBac/CKavxIuxePTT5dMcVRqwEV35Z20jQ/d8TMKZ/ifOgIlBZQOluqWOBUzQD9Dnw==" rel="stylesheet" href="https://assets.github.ibm.com/assets/github-e4ca0adaf3606c0d0b3e861c62b7733c.css" />
+
+
+
+  <link rel="mask-icon" href="https://assets.github.ibm.com/pinned-octocat.svg" color="#000000">
+  <link rel="icon" type="image/x-icon" class="js-site-favicon" href="https://assets.github.ibm.com/favicon-ent.ico">
+
+<meta name="theme-color" content="#1e2327">
+
+
+
+
+
+  <link rel="manifest" href="/manifest.json" crossOrigin="use-credentials">
+
+  </head>
+
+  <body>
+    
+  
+<div class="container">
+  <div class="blankslate blankslate-narrow mt-5">
+    <svg height="32" class="octicon octicon-shield-lock blankslate-icon" viewBox="0 0 14 16" version="1.1" width="28" aria-hidden="true"><path fill-rule="evenodd" d="M7 0L0 2v6.02C0 12.69 5.31 16 7 16c1.69 0 7-3.31 7-7.98V2L7 0zM5 11l1.14-2.8a.568.568 0 00-.25-.59C5.33 7.25 5 6.66 5 6c0-1.09.89-2 1.98-2C8.06 4 9 4.91 9 6c0 .66-.33 1.25-.89 1.61-.19.13-.3.36-.25.59L9 11H5z"/></svg>
+    <h3>You are being redirected to your identity provider in order to authenticate.</h3>
+    <p>
+      If your browser does not redirect you back, please <a id="redirect" href="https://w3id.sso.ibm.com/auth/sps/samlidp2/saml20/logininitial?RequestBinding=HTTPPost&amp;PartnerId=https://github.ibm.com&amp;NameIdFormat=email&amp;Target=https://github.ibm.com">click here</a> to continue.
+    </p>
+  </div>
+</div>
+
+
+  </body>
+</html>

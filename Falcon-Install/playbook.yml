@@ -1,0 +1,63 @@
+---
+#- name: Installing Crowdstrike-sensor in various Os
+#  hosts: all
+#  ignore_errors: yes
+#  vars:
+#    - cid: 20709802E00E4B4C9442CE5F8CA3E69D-9C
+#    - tags1: demo1
+ # tasks:
+    - name: Crowdstrike installing on Rhel6
+      import_tasks: rhel6.yml
+      when: 
+        - ansible_facts.distribution == "RedHat" and ansible_facts.distribution_major_version == "6"
+    
+    - name: Crowdstrike installing on Rhel7
+      import_tasks: rhel7.yml
+      when:
+        - ansible_facts.distribution == "RedHat" and ansible_facts.distribution_major_version == "7"
+    
+    - name: Crowdstrike installing on Rhel8
+      import_tasks: rhel8.yml
+      when:
+        - ansible_facts.distribution == "RedHat" and ansible_facts.distribution_major_version == "8"
+   
+    - name: Crowdstrike installing on Ubunut
+      import_tasks: ubuntu.yml 
+      when:
+        - ansible_facts.distribution == "Ubuntu" and ansible_facts.distribution_major_version == "18"
+
+    - name: Crowdstrike installing on Ubunut
+      import_tasks: centos7.yml
+      when:
+        - ansible_facts.distribution == "CentOS" and ansible_facts.distribution_major_version == "7"
+
+#- name: Getting output in Master Node
+#  hosts: all
+#  tasks:
+    - name: Gather Installed Packages Facts
+      package_facts:
+        manager: "auto"
+
+  #  - name: "falcon-sensor Found test result"
+  #    debug: var=ansible_facts.packages['falcon-sensor']
+  #    when: "'falcon-sensor' in ansible_facts.packages"
+  #    tags:
+  #      - falcon-sensor
+
+   # - name: "falcon-sensor Not-found test result"
+   #   debug:
+   #     msg: "falcon-sensor NOT found"
+   #   when: "'falcon-sensor' not in ansible_facts.packages"
+   #   tags:
+ #     - falcon-sensor
+
+
+      
+    - name: copying output in master machine
+      shell: echo "Falcon-sensor successfully Installed in {{ ansible_facts.fqdn }}" >> "/tmp/master-output"
+      when: "'falcon-sensor' in ansible_facts.packages" 
+      delegate_to: localhost
+    
+    - shell: echo "Falcon-sensor installation is Failed in {{ ansible_facts.fqdn }}" >> "/tmp/master-error"
+      when: "'falcon-sensor' not in ansible_facts.packages"
+      delegate_to: localhost
